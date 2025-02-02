@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendamento Barbearia</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body class="bg-gray-100">
+  <header class="bg-blue-600 text-white p-4">
+    <h1 class="text-2xl font-bold text-center">Barbearia Estilo Brasil</h1>
+  </header>
+
+  <div class="container mx-auto p-4">
+    <!-- Passo 1: Serviço e Barbeiro -->
+    <div class="grid md:grid-cols-2 gap-4 mb-8">
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h2 class="text-xl font-bold mb-4">Nossos Serviços</h2>
+        <div class="space-y-2">
+          <button onclick="agendamento.selecionarServico('Corte Social', event)" class="servico-btn w-full p-2 text-left hover:bg-blue-50" aria-label="Selecionar Corte Social">
+            ✂️ Corte Social
+          </button>
+          <button onclick="agendamento.selecionarServico('Barba Completa', event)" class="servico-btn w-full p-2 text-left hover:bg-blue-50" aria-label="Selecionar Barba Completa">
+            🪒 Barba Completa
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h2 class="text-xl font-bold mb-4">Nossos Barbeiros</h2>
+        <div class="space-y-2">
+          <button onclick="agendamento.selecionarBarbeiro('Marcos', event)" class="barbeiro-btn w-full p-2 text-left hover:bg-blue-50">
+            👨🦰 Marcos (Especialista em Degradê)
+          </button>
+          <button onclick="agendamento.selecionarBarbeiro('Ricardo', event)" class="barbeiro-btn w-full p-2 text-left hover:bg-blue-50">
+            👨🦱 Ricardo (Mestre em Barba)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Passo 2: Calendário Brasileiro -->
+    <div class="bg-white p-6 rounded-lg shadow mb-8">
+      <h2 class="text-xl font-bold mb-4">Escolha a Data</h2>
+      <div id="calendario"></div>
+      <div id="feedback" class="mt-4 text-blue-600"></div> <!-- Elemento para exibir a mensagem de feedback -->
+    </div>
+
+    <!-- Passo 3: Horários -->
+    <div id="horarios" class="hidden bg-white p-6 rounded-lg shadow mb-8">
+      <h2 class="text-xl font-bold mb-4">Horários Disponíveis</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="container-horarios"></div>
+    </div>
+
+    <!-- Confirmação -->
+    <div id="confirmacao" class="hidden bg-white p-6 rounded-lg shadow">
+      <h2 class="text-xl font-bold mb-4">Confirme Seu Agendamento</h2>
+      <div class="space-y-2 mb-4">
+        <p><span class="font-semibold">Serviço:</span> <span id="servico-selecionado"></span></p>
+        <p><span class="font-semibold">Barbeiro:</span> <span id="barbeiro-selecionado"></span></p>
+        <p><span class="font-semibold">Data:</span> <span id="data-selecionada"></span></p>
+        <p><span class="font-semibold">Horário:</span> <span id="horario-selecionado"></span></p>
+      </div>
+      <button onclick="agendamento.confirmarAgendamento()"
+        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">
+        Confirmar Agendamento
+      </button>
+    </div>
+
+    <!-- Seção para Agendamentos Confirmados -->
+    <div id="agendamentos-confirmados" class="mt-8">
+      <h2 class="text-xl font-bold mb-4">Agendamentos Confirmados Ordenados por data e hora</h2>
+      <div id="lista-agendamentos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+  </div>
+</body>
+
+</html>
